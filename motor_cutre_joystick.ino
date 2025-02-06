@@ -1,3 +1,8 @@
+//https://www.youtube.com/watch?v=6cgpPWlSjig
+//El funcionamiento para el coche deberá ser exactamente igual
+//pero en lugar del motor pequeñito habrá que usar el tocho
+
+
 int speedPin=11; 
 int dirPin1=12;
 int dirPin2=13;
