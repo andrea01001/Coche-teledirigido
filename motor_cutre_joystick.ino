@@ -27,7 +27,7 @@ void loop() {
 
   if(yVal<=550){
     //velocidad
-    speedMotor=map(yVal,550,0,0,255);//varía la velocidad gradualmente
+    speedMotor=map(yVal,550,0,100,255);//varía la velocidad gradualmente
 
     Serial.println("positivo");
     digitalWrite(dirPin2,0);
@@ -38,7 +38,7 @@ void loop() {
 
   if(yVal>550){
     //velocidad
-    speedMotor=map(yVal,550,1023,0,255);//varía la velocidad gradualmente
+    speedMotor=map(yVal,550,1023,100,255);//varía la velocidad gradualmente
 
     Serial.println("negativo");
     digitalWrite(dirPin1,0);//direcciones positiva y negativa
