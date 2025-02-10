@@ -1,0 +1,52 @@
+//El funcionamiento para el coche deberá ser exactamente igual
+//pero en lugar del motor pequeñito habrá que usar el tocho
+//cambio para que funcione con la libreria servo
+
+#include <Servo.h>
+
+Servo motor;  // Creamos un objeto Servo para el motor
+
+int speedPin = 11;  // Pin PWM para el motor (como si fuera un ESC)
+int dirPin1 = 12;
+int dirPin2 = 13;
+
+int yPin = A0;  // Entrada del joystick
+int yVal;
+
+void setup() {
+  Serial.begin(9600);
+
+  motor.attach(motorPin);  // Configura el pin PWM del motor
+  pinMode(dirPin1, OUTPUT);
+  pinMode(dirPin2, OUTPUT);
+  pinMode(yPin, INPUT);
+
+  motor.writeMicroseconds(1500);  // Valor neutro del motor
+}
+
+void loop() {
+  yVal = analogRead(yPin);
+  Serial.println(yVal);
+
+  int escValue;
+
+  if (yVal <= 550) {
+    // Mapeo de valores del joystick (centro hacia abajo)
+    escValue = map(yVal, 550, 0, 1500, 1000);  // 1500 = neutro, 1000 = máximo reversa
+    Serial.println("Reversa");
+    
+    digitalWrite(dirPin1, LOW);
+    digitalWrite(dirPin2, HIGH);
+  } 
+  else if (yVal > 550) {
+    // Mapeo de valores del joystick (centro hacia arriba)
+    escValue = map(yVal, 550, 1023, 1500, 2000);  // 1500 = neutro, 2000 = máxima velocidad
+    Serial.println("Adelante");
+
+    digitalWrite(dirPin1, HIGH);
+    digitalWrite(dirPin2, LOW);
+  }
+
+  motor.writeMicroseconds(escValue);  // Enviar señal PWM al motor
+  delay(10);  // Pequeña pausa para estabilidad
+}
