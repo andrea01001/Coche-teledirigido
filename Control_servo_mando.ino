@@ -15,11 +15,11 @@ void loop() {
 		if (PS4.RStickX() <= 10 && PS4.RStickX() >= -10) { //Zona muerta del jostick (evita el drift)
 			servoMotor.write(90); //Centra el servo "Ruedas Rectas"
 		}
-		if (PS4.RStickX() >= 10 || PS4.RStickX() <= -10) {
+		if (PS4.RStickX() >= 10 || PS4.RStickX() <= -10) { //PS4.RStickX() Lee el valor del jostick derecho en el eje x
 			int angle = map(PS4.RStickX(), 127, -127, 45, 135);
 			servoMotor.write(constrain(angle, 45, 135)); //Mueve el servo segun la posicion del jostick
 		}
 	}
 }
 /* Depende de como funciona a la hora de controlar el coche, podriamos modificar el codigo para
- *  que el movimiento sea mas suave a la hora de girar */
+que el movimiento sea mas suave a la hora de girar */
