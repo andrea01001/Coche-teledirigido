@@ -7,6 +7,7 @@ Servo motor;  // Creamos un objeto Servo para el motor
 //int speedPin = 11;  // Pin PWM para el motor (como si fuera un ESC)
 int dirPin1 = 12;
 int dirPin2 = 13;
+int escValue=250;
 
 int yPin = A0;  // Entrada del joystick
 int yVal;
@@ -26,7 +27,6 @@ void loop() {
   yVal = analogRead(yPin);
   Serial.println(yVal);
 
-  int escValue;
 
   if (yVal <= 550) {
     // Mapeo de valores del joystick (centro hacia abajo)
@@ -35,6 +35,7 @@ void loop() {
     
     digitalWrite(dirPin1, LOW);
     digitalWrite(dirPin2, HIGH);
+    analogWrite(11, escValue);
   } 
   else if (yVal > 550) {
     // Mapeo de valores del joystick (centro hacia arriba)
@@ -43,6 +44,7 @@ void loop() {
 
     digitalWrite(dirPin1, HIGH);
     digitalWrite(dirPin2, LOW);
+    analogWrite(11, escValue);
   }
 
   motor.writeMicroseconds(escValue);  // Enviar señal PWM al motor
