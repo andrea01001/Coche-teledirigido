@@ -1,17 +1,17 @@
 #include <ESP32Servo.h>
 #include <PS4Controller.h>
 
-const int escPin = 13;  // Pin donde conectas la señal del ESC
+const int escPin = 18;  // Pin donde conectas la señal del ESC
 Servo motorESC;
 
 void setup() {
   Serial.begin(115200);
-  PS4.begin("00:1A:7D:DA:71:13"); // Reemplaza con la dirección MAC de tu control PS4
+  PS4.begin(); // Reemplaza con la dirección MAC de tu control PS4
   Serial.println("Esperando conexión con el control PS4...");
 
-  motorESC.attach(escPin, 1000, 2000); // Rango del ESC (1000-2000 µs)
+  motorESC.attach(escPin); // Rango del ESC (1000-2000 µs)
 
-  // Calibración del ESC:
+  // Calibración del ESC:  Importante para que el motor se consigure
   motorESC.writeMicroseconds(2000); // Máxima señal (arranque seguro)
   delay(2000);
   motorESC.writeMicroseconds(1000); // Mínima señal
@@ -20,6 +20,8 @@ void setup() {
   delay(2000);
 
   Serial.println("ESC calibrado y listo.");
+  delay(2000);
+
 }
 
 void loop() {
@@ -45,5 +47,4 @@ void loop() {
     delay(1000);  // Espera 1 segundo antes de intentar reconectar
   }
 
-  delay(10);  // Pequeña pausa para estabilidad
-}
+  delay(20);  // Pequeña pausa para estabilidad
