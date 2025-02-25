@@ -23,7 +23,7 @@ void setup() {
 
 	servoMotor.attach(pinServo);
 	servoMotor.write(90);
-	millis(2000);
+	delay(2000);
 }
 
 void Control_Motor() {
@@ -43,7 +43,7 @@ void Control_Motor() {
 	// Envía la señal PWM al ESC y asegura que el valor esté dentro del rango permitido
 	motorESC.writeMicroseconds(constrain(escValue, 1000, 2000));
 
-	delay(10); //Para estabilidad del ESC
+	millis(10); //Para estabilidad del ESC
 }
 
 void Control_Servo() {
