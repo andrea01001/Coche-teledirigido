@@ -43,7 +43,7 @@ void Control_Motor() {
 	// Envía la señal PWM al ESC y asegura que el valor esté dentro del rango permitido
 	motorESC.writeMicroseconds(constrain(escValue, 1000, 2000));
 
-	millis(10); //Para estabilidad del ESC
+	delay(10); //Para estabilidad del ESC
 }
 
 void Control_Servo() {
