@@ -23,7 +23,7 @@ void setup() {
 
 	servoMotor.attach(pinServo);
 	servoMotor.write(90);
-	delay(2000);
+	millis(2000);
 }
 
 void Control_Motor() {
